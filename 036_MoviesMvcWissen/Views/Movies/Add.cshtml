@@ -5,15 +5,26 @@
 
 <h2>@ViewBag.Title</h2>
 
+<p style="color: rgba(0, 0, 255, 0.46) ;">
+    @ViewBag.Message
+</p>
+
 <form action="~/Movies/Add" method="post">
     <div class="form-group">
         <label for="tbName">Name</label>
         <input type="text" class="form-control" id="tbName" name="Name" />
     </div>
     <div class="form-group">
-        <label for="tbProductionYear">Production Year</label>
-        <input type="text" class="form-control" id="tbProductionYear" name="ProductionYear"/>
-    </div>
+        <label for="ddlProductionYear">Production Year</label>
+        <select id="ddlProductionYear" name="ProductionYear" class="form-control">
+            @for (int i = DateTime.Now.Year; i >= 2000; i--)
+            {
+                <option value="@i">@i</option>
+            }
+            @*<option value="2020" selected>2020</option>
+            <option value="2019">2019</option>*@
+        </select>
+</div>
     <div class="form-group">
         <label for="tbBoxOfficeReturn">Box Office Return</label>
         <input type="text" class="form-control" id="tbBoxOfficeReturn" name="BoxOfficeReturn" />
