@@ -3,7 +3,14 @@
     ViewBag.Title = "Movies";
 }
 
+@*@Html.Action("Welcome")*@
+@{
+    Html.RenderAction("Welcome");
+}
+
 <h2>@ViewBag.Title</h2>
+
+
 
 <label class="text-success">@TempData["Info"]</label>
 <br />
@@ -12,9 +19,19 @@
 @*<label>@Model.Count() Movies Found</label>*@
 <span>@ViewData["count"] records found</span>
 @*<span>@ViewBag.count records found</span>*@
+<style>
+    #renk {
+        background-color: white;
+    }
 
+        #renk:hover {
+            transition: 0.8s;
+            background-color: chocolate;
+        }
+</style>
 <table class="table">
     <tr>
+        <td></td>
         <td>
             <b>Name</b>
         </td>
@@ -24,37 +41,39 @@
         <td>
             <b>Box Office Return</b>
         </td>
-        <td>
-            
-        </td>
+        <td></td>
     </tr>
     @if (Model != null)
     {
         foreach (var movie in Model)
         {
-    <tr>
-        <td class="alert-primary" >
-            @movie.Name
-        </td>
-        <td class="alert-dark">
-            @movie.ProductionYear
-        </td>
-        <td class="alert-danger">
-            @if (movie.BoxOfficeReturn == null)
-            {
-                <p>--</p>
-            }
-            else
-            {
-                @movie.BoxOfficeReturn
-            }
+            <tr>
+                <td>
+                    @Html.ActionLink(" ", "Details", new { id = movie.Id }, new { @class = "fa fa-info text-blue" })
+                </td>
+                <td class="alert-primary">
+                    @movie.Name
+                </td>
+                <td class="alert-dark">
+                    @movie.ProductionYear
+                </td>
+                <td class="alert-danger">
+                    @if (movie.BoxOfficeReturn == null)
+                    {
+                        <text>--</text>
+                    }
+                    else
+                    {
+                        @movie.BoxOfficeReturn
+                    }
 
-        </td>
-        <td class="btn-danger">
-           @Html.ActionLink("Edit", "Edit", new { id = movie.Id }) |
-           @Html.ActionLink("Delete", "Delete", new { id = movie.Id })
-        </td>
-    </tr>
+                </td>
+                <td class="btn-outline-primary" id="renk">
+
+                    @Html.ActionLink(" ", "Edit", new { id = movie.Id }, new { @class = "fa fa-pencil-square-o text-success" }) |
+                    @Html.ActionLink(" ", "Delete", new { id = movie.Id }, new { @class = "fa fa-trash" })
+                </td>
+            </tr>
         }
     }
 
